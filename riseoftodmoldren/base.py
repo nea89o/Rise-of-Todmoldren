@@ -64,6 +64,9 @@ class State:
     def on_start(self, app: 'StateApp'):
         pass
 
+    def on_keydown(self, app: 'StateApp', key):
+        pass
+
 
 class StateApp(BaseApp):
 
@@ -73,6 +76,15 @@ class StateApp(BaseApp):
 
     def on_event(self, event):
         self.states[-1].on_event(self, event)
+        if event.type == pygame.QUIT:
+            self.should_close = True
+        if event.type == pygame.KEYDOWN:
+            self.on_keydown(event.key)
+
+    def on_keydown(self, key):
+        if key == pygame.K_ESCAPE:
+            self.should_close = True
+        self.states[-1].on_keydown(self, key)
 
     def on_start(self):
         self.states[-1].on_start(self)
