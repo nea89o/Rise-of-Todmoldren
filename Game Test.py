@@ -1,7 +1,9 @@
-import turtle
-import time
+import os
 import random
+import time
+import turtle
 
+os.chdir('riseoftodmoldren/res')  # Moved assets
 window = turtle.Screen()
 window.setup(1280, 720)
 window.bgcolor("black")
